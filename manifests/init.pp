@@ -47,7 +47,7 @@ class sdkman (
         default => [$home_env, "JAVA_HOME=$java_home"]
     }
 
-    wget::fetch {'http://get.sdkman.io':
+    wget::fetch {'https://get.sdkman.io':
       destination => '/tmp/sdkman-install.sh',
       verbose     => true,
       execuser    => $owner,
@@ -61,7 +61,7 @@ class sdkman (
       cwd         => '/tmp',
       logoutput   => true,
       unless      => 'test -e $HOME/.sdkman',
-      require     => Package['unzip'],
+      #require     => Package['unzip'],
     } ~>
     file {"$user_home/.sdkman/etc/config" :
       ensure => file,
